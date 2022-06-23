@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+
+  <script src="JS/Rotation.js"></script>
+  <script src="JS/Coin.js"></script>
+  <script src="JS/colliderFish.js"></script>
+  <script src="JS/Game.js"></script>
+  
+  </head>
+
+<body>
+  <a-scene>
+    <a-entity camera position="0 10 25"></a-entity>
+
+    <a-assests>
+      <a-asset-item id="island" src="/model/island/scene.gltf"></a-asset-item>
+      <a-asset-item id="fish" src="/model/fish/scene.gltf"></a-asset-item>
+      <a-asset-item id="scuba" src="/model/scuba_driver/scene.gltf"></a-asset-item>
+      <a-asset-item id="treasure" src="/model/treasure/model.gltf"></a-asset-item>
+      <a-asset-item id="turtle" src="/model/turtle/scene.gltf"></a-asset-item>
+    </a-assests>
+
+    <a-sky geometry="primitive: sphere;"
+      material="shader: gradient; bottomColor: #00009e; topColor:109 205 227;offset: 0.0001;" 
+      radius="100"
+      animation="property: rotation; to: 0 300 0; easing:linear; loop: true; dur: 500000">
+
+      <a-entity 
+        gltf-model="#island" 
+        position="0 -15 -50" 
+        scale="1 1 1"
+        >
+      </a-entity>
+
+      <a-entity 
+        gltf-model="#treasure"
+        position="0 -30 -50" 
+        scale="15 15 15">
+      </a-entity>
+
+      <a-entity 
+        gltf-model="#treasure" 
+        position="-10 -30 -50" 
+        rotation="0 90 0" 
+        scale="15 15 15">
+      </a-entity>
+
+      <a-entity 
+        gltf-model="#treasure" 
+        position="-7 -33 -36" 
+        rotation="0 50 0" 
+        scale="15 15 15">
+      </a-entity>
+
+      <a-entity 
+        gltf-model="#turtle" 
+        scale="0.005 0.005 0.005" 
+        position="0 -10 0" 
+        rotation="0 90 0">
+      </a-entity>
+
+      <a-entity 
+        gltf-model="#scuba" 
+        scale="0.1 0.1 0.1" 
+        position="4 0 18"
+        rotation="0 90 -20" 
+        diver
+        dynamic-body ="mass:0"
+        game-play>
+        <a-sphere radius="0.8" , position="0 -19 -30" color="#ADE9F2" opacity="0.4"
+          animation="property: position; to: 0 50 -30;easing:linear; loop: true; dur: 5000"
+        ></a-sphere>
+      </a-entity>
+      
+    </a-sky>
+
+    
+
+    <a-cylinder color="#4173D6" radius="100" opacity="0.3"></a-cylinder>
+
+    <a-entity position="0 0 0" id="fishmodels" fish> </a-entity>
+    <a-entity position="0 0 0" id="coinModel" treasure-coins> </a-entity>
+
+    <a-entity id="header" position="1 5 0">
+      <!-- Title -->
+      <a-entity
+        position="-28.5 21.5 0"
+        text="font: exo2bold; align: center; width: 45; color: black; value:VR Scuba Dive"
+      ></a-entity>
+
+      <!-- Timer -->
+      <a-entity position="-23.5 19.3 0">
+        <a-entity
+          position=""
+          text="font: aileronsemibold; width: 14; color: black; value: TIME\nREMAINING"
+        ></a-entity>
+        <a-entity
+          id="timer"
+          position="-9.8 0.3 0"
+          text="font: exo2bold; align: center; width: 30; color: black; value: 00:00"
+        ></a-entity>
+      </a-entity>
+
+      <!-- Traget Status -->
+      <a-entity position="-18 19.3 0">
+        <a-entity
+          position=""
+          text="font: aileronsemibold; width: 13; color: black; value: TRAGETS\nREMAINING"
+        ></a-entity>
+        <a-entity
+          id="targets"
+          position="-7.8 0.3 0"
+          text="font: exo2bold; align: center; width: 30; color: black; value: 10"
+        ></a-entity>
+      </a-entity>
+
+      <!-- Score -->
+      <a-entity position="30.5 21.5 0">
+        <a-entity
+          position=""
+          text="font: exo2bold; align: center; width: 30; color: black; value: SCORE"
+        ></a-entity>
+        <a-entity
+          id="score"
+          position="0 -2 0"
+          text="font: exo2bold; align: center; width: 40; color: black; value: 0"
+        ></a-entity>
+      </a-entity>
+    </a-entity>
+
+    <!------------------------------------Game Over-------------------------------->
+    <a-entity
+      id="game_over_text"
+      position="0 20 0"
+      text="font: exo2bold; align: center; width: 100; color: white;value: Game Over!!!"
+      visible="false"
+    ></a-entity>
+
+  </a-scene>
+</body>
+
+</html>
